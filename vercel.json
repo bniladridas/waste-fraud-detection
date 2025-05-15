@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "gemini_api.py",
+      "use": "@vercel/python",
+      "config": { "runtime": "python3.9", "requirementsPath": "requirements-vercel.txt" }
+    },
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.css", "use": "@vercel/static" },
+    { "src": "*.js", "use": "@vercel/static" },
+    { "src": "*.svg", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "gemini_api.py" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ],
+  "env": {
+    "GEMINI_API_KEY": "@gemini_api_key"
+  }
+}

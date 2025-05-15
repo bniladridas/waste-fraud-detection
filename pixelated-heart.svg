@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="350" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pixelated Heart -->
+  <rect x="120" y="60" width="40" height="40" fill="#333333"/>
+  <rect x="160" y="60" width="40" height="40" fill="#333333"/>
+  <rect x="240" y="60" width="40" height="40" fill="#333333"/>
+  <rect x="280" y="60" width="40" height="40" fill="#333333"/>
+  
+  <rect x="80" y="100" width="40" height="40" fill="#333333"/>
+  <rect x="120" y="100" width="40" height="40" fill="#333333"/>
+  <rect x="160" y="100" width="40" height="40" fill="#333333"/>
+  <rect x="200" y="100" width="40" height="40" fill="#333333"/>
+  <rect x="240" y="100" width="40" height="40" fill="#333333"/>
+  <rect x="280" y="100" width="40" height="40" fill="#333333"/>
+  <rect x="320" y="100" width="40" height="40" fill="#333333"/>
+  
+  <rect x="80" y="140" width="40" height="40" fill="#333333"/>
+  <rect x="120" y="140" width="40" height="40" fill="#333333"/>
+  <rect x="160" y="140" width="40" height="40" fill="#333333"/>
+  <rect x="200" y="140" width="40" height="40" fill="#333333"/>
+  <rect x="240" y="140" width="40" height="40" fill="#333333"/>
+  <rect x="280" y="140" width="40" height="40" fill="#333333"/>
+  <rect x="320" y="140" width="40" height="40" fill="#333333"/>
+  
+  <rect x="120" y="180" width="40" height="40" fill="#333333"/>
+  <rect x="160" y="180" width="40" height="40" fill="#333333"/>
+  <rect x="200" y="180" width="40" height="40" fill="#333333"/>
+  <rect x="240" y="180" width="40" height="40" fill="#333333"/>
+  <rect x="280" y="180" width="40" height="40" fill="#333333"/>
+  
+  <rect x="160" y="220" width="40" height="40" fill="#333333"/>
+  <rect x="200" y="220" width="40" height="40" fill="#333333"/>
+  <rect x="240" y="220" width="40" height="40" fill="#333333"/>
+  
+  <rect x="200" y="260" width="40" height="40" fill="#333333"/>
+</svg>

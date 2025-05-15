@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="400" viewBox="0 0 1200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pixelated Mountain Landscape -->
+  <!-- Base -->
+  <rect x="0" y="360" width="1200" height="40" fill="#f5f5dc" opacity="0.3"/>
+  
+  <!-- Mountain 1 (left) -->
+  <rect x="40" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="80" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="120" y="280" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="160" y="280" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="200" y="240" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="240" y="200" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="280" y="160" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="320" y="200" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="360" y="240" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="400" y="280" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="440" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  
+  <!-- Mountain 2 (middle) -->
+  <rect x="520" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="560" y="280" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="600" y="240" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="640" y="200" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="680" y="160" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="720" y="120" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="760" y="160" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="800" y="200" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="840" y="240" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="880" y="280" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="920" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  
+  <!-- Mountain 3 (right) -->
+  <rect x="960" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="1000" y="280" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="1040" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="1080" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="1120" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  
+  <!-- Additional details -->
+  <rect x="200" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="240" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="280" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="320" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="360" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="400" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  
+  <rect x="600" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="640" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="680" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="720" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="760" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="800" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+  <rect x="840" y="320" width="40" height="40" fill="#f5f5dc" opacity="0.3"/>
+</svg>

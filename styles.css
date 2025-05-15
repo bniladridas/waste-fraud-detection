@@ -1,0 +1,921 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Libre Baskerville', 'Times New Roman', Times, serif;
+    background-color: #fefaeb; /* Cream/off-white color */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape on iOS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation; /* Improves touch responsiveness */
+}
+
+.page-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    position: relative;
+}
+
+.section {
+    min-height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+
+
+.quote {
+    text-align: center;
+    padding: 4rem 2rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.quote.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quote h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.4;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.dotted-pattern {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background-image: url('dotted-pattern.svg');
+    background-size: 400px 400px;
+    background-position: center bottom;
+    opacity: 0.3;
+    mask-image: linear-gradient(to bottom, transparent 20%, black);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black);
+    transition: transform 0.3s ease-out;
+}
+
+@media (max-width: 768px) {
+    .quote {
+        padding: 3rem 1.5rem;
+    }
+
+    .quote h1 {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+    }
+
+    .dotted-pattern {
+        height: 80px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .quote {
+        padding: 5rem 2rem;
+    }
+
+    .quote h1 {
+        font-size: 4.5rem;
+        letter-spacing: 6px;
+    }
+}
+
+/* Cross section styles */
+.cross-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.cross {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cross-horizontal, .cross-vertical {
+    position: absolute;
+    opacity: 0;
+}
+
+.cross {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-image: url('crucifix.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.cross.animate {
+    opacity: 0.7;
+    transform: scale(1);
+}
+
+.dotted-landscape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background-image: url('dotted-landscape.svg');
+    background-size: cover;
+    background-position: center bottom;
+    opacity: 0;
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 20%,
+            black 100%
+        );
+    -webkit-mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 20%,
+            black 100%
+        );
+    transition: opacity 1s ease;
+}
+
+.dotted-landscape.animate {
+    opacity: 0.5;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 50px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    opacity: 0.6;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-indicator::after {
+    content: '';
+    width: 6px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    margin-top: 8px;
+    animation: scrollAnimation 2s infinite;
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+}
+
+@keyframes scrollAnimation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(15px);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Third section styles */
+.third-section {
+    background-color: #fffbeb;
+    position: relative;
+    overflow: hidden;
+}
+
+.hands-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.hands-image {
+    width: 50%;
+    height: 60%;
+    background-image: url('hands.svg');
+    background-size: contain;
+    background-position: center left;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.hands-image.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.quote-right {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 45%;
+    text-align: right;
+    opacity: 0;
+    transform: translateY(-50%) translateX(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.quote-right.animate {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.quote-right h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #333;
+}
+
+.dotted-pattern-right {
+    right: 0;
+    left: auto;
+    width: 30%;
+}
+
+/* Fourth section styles */
+.fourth-section {
+    background-color: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+    color: #f5f5dc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 60px 0 100px;
+    min-height: 100vh;
+}
+
+.checkered-pattern {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 15%;
+    background-image: url('checkered-pattern.svg');
+    background-size: cover;
+    background-position: center left;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.checkered-pattern.animate {
+    opacity: 0.8;
+    transform: translateX(0);
+}
+
+.hope-container {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.hope-container.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hope-text-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.hope-subtext {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #f5f5dc;
+}
+
+.search-container {
+    position: relative;
+    margin: 40px auto 0;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+    z-index: 10;
+}
+
+.search-container.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.search-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background-color: transparent;
+    color: #333;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #999;
+    font-size: 1.05rem;
+    opacity: 0.8;
+}
+
+.search-button {
+    background-color: #1a1a1a;
+    color: #f5f5dc;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #333;
+}
+
+
+
+/* Fifth section styles */
+.fifth-section {
+    background-color: #fffbeb;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pixelated-heart-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pixelated-heart {
+    width: 400px;
+    height: 350px;
+    background-image: url('pixelated-heart.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.pixelated-heart.animate {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.horizontal-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+    top: 50%;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 1.5s ease 0.5s;
+}
+
+.horizontal-line.animate {
+    transform: scaleX(1);
+}
+
+/* Sixth section styles */
+.sixth-section {
+    background-color: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 150px; /* Add padding to ensure footer is visible */
+    min-height: 50vh;
+}
+
+.prayer-container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.prayer-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #f5f5dc;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.prayer-text.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pixelated-mountain {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background-image: url('pixelated-mountain.svg');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2s ease 0.5s, transform 2s ease 0.5s;
+}
+
+.pixelated-mountain.animate {
+    opacity: 0.8;
+    transform: translateY(0);
+}
+
+/* Loading indicator and result modal */
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: #fff;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f5f5dc;
+    border-top: 5px solid #1a1a1a;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.result-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.result-content {
+    background-color: #fff;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.result-header {
+    padding: 15px 20px;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.result-body {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(80vh - 60px);
+    line-height: 1.6;
+}
+
+/* Markdown content styling */
+.markdown-content {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.markdown-content h1 {
+    font-size: 2em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.markdown-content h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.markdown-content h3 {
+    font-size: 1.25em;
+}
+
+.markdown-content h4 {
+    font-size: 1em;
+}
+
+.markdown-content p,
+.markdown-content ul,
+.markdown-content ol {
+    margin-bottom: 16px;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+    padding-left: 2em;
+}
+
+.markdown-content li {
+    margin-bottom: 0.25em;
+}
+
+.markdown-content code {
+    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+}
+
+.markdown-content pre {
+    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    margin-bottom: 16px;
+}
+
+.markdown-content pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.markdown-content blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+    margin-bottom: 16px;
+}
+
+.markdown-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.markdown-content table th,
+.markdown-content table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+.markdown-content table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+
+.markdown-content table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+.markdown-content img {
+    max-width: 100%;
+    box-sizing: content-box;
+}
+
+.markdown-content hr {
+    height: 0.25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #e1e4e8;
+    border: 0;
+}
+
+
+
+
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section {
+        padding: 60px 15px;
+    }
+
+    .hope-text-image {
+        max-width: 90%;
+    }
+
+    .hope-subtext {
+        font-size: 1.4rem;
+    }
+
+    .search-container {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        width: 95%;
+        margin: 20px auto 0;
+    }
+
+    .search-input-wrapper {
+        flex-direction: column;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 0;
+    }
+
+    .search-button {
+        width: 100%;
+        border-radius: 0;
+        padding: 12px;
+        min-height: 48px; /* Improved touch target */
+    }
+
+    /* Improved third section layout for mobile */
+    .hands-image {
+        width: 100%;
+        background-position: center;
+        margin-bottom: 30px;
+    }
+
+    .quote-right {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 90%;
+        text-align: center;
+        transform: none;
+        margin: 20px auto;
+    }
+
+    .quote-right.animate {
+        transform: none;
+        opacity: 1;
+    }
+
+    .quote-right h2 {
+        font-size: 1.8rem;
+    }
+
+    .pixelated-heart {
+        width: 300px;
+        height: 250px;
+    }
+
+    .prayer-text {
+        font-size: 2.5rem;
+    }
+
+    .result-content {
+        width: 95%;
+    }
+
+    .result-header {
+        padding: 12px 15px;
+    }
+
+    .result-body {
+        padding: 15px;
+    }
+}
+
+/* Small screen adjustments */
+@media (max-width: 480px) {
+    .section {
+        padding: 40px 10px;
+        min-height: auto;
+    }
+
+    .quote h1 {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+
+    .hope-subtext {
+        font-size: 1.2rem;
+    }
+
+    .search-input {
+        font-size: 1rem;
+        padding: 12px 15px;
+    }
+
+    .search-input::placeholder {
+        font-size: 0.9rem;
+    }
+
+    .pixelated-heart {
+        width: 200px;
+        height: 175px;
+    }
+
+    .prayer-text {
+        font-size: 2rem;
+    }
+
+    .result-header h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Improve touch targets for small screens */
+    button,
+    .search-button,
+    .close-button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Mobile device specific adjustments */
+.mobile-device .section {
+    scroll-snap-align: none; /* Disable scroll snapping on mobile for better performance */
+}
+
+.mobile-device .search-input-wrapper {
+    flex-direction: column;
+}
+
+.mobile-device .search-button {
+    width: 100%;
+    border-radius: 0;
+}
+
+/* Fix for iOS input zoom */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="search"] {
+        font-size: 16px; /* Prevents iOS from zooming in on inputs */
+    }
+}
+
+/* Mobile result modal styles */
+.mobile-result {
+    width: 95% !important;
+    max-height: 90vh !important;
+}
+
+.mobile-result .result-header {
+    padding: 10px 15px;
+}
+
+.mobile-result .result-body {
+    padding: 12px;
+}
+
+.mobile-result .close-button {
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

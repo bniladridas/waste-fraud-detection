@@ -1,0 +1,11 @@
+google-genai
+python-dotenv
+flask
+flask-cors
+markdown
+bleach
+
+# Testing dependencies
+pytest
+pytest-cov
+pytest-mock
