@@ -38,6 +38,8 @@ Before deploying, ensure your repository is clean:
    - Value: Your Google Gemini API key
    - Environment: Production (and optionally Preview/Development)
 
+   **Important**: Make sure to add this environment variable directly in the Vercel dashboard. The variable must be named exactly `GEMINI_API_KEY` for the application to work correctly.
+
 ### 3. Deploy
 
 1. Click "Deploy"
@@ -70,12 +72,11 @@ The project includes a `vercel.json` file that configures:
   "routes": [
     { "src": "/api/(.*)", "dest": "gemini_api.py" },
     { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "env": {
-    "GEMINI_API_KEY": "@gemini_api_key"
-  }
+  ]
 }
 ```
+
+Note: Environment variables are configured directly in the Vercel dashboard, not in the vercel.json file.
 
 ## Troubleshooting
 
