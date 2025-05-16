@@ -297,28 +297,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Create the loading content
             loadingIndicator.innerHTML = `
-                <div class="loading-animation">
-                    <img src="data-analysis-loader.svg" alt="Loading" width="200" height="200">
-                </div>
-                <div class="loading-message-container">
-                    <p id="loading-message">Initializing analysis...</p>
+                <div class="loading-content">
+                    <div class="loading-animation">
+                        <img src="advanced-loader.svg" alt="Loading" width="240" height="240">
+                    </div>
+                    <h2 class="loading-title">Processing Your Request</h2>
+                    <p class="loading-subtitle">Our AI is analyzing your query to detect potential waste and fraud patterns.</p>
+                    <div class="loading-message-container">
+                        <p id="loading-message">Initializing analysis...</p>
+                    </div>
+                    <div class="loading-progress">
+                        <div class="loading-progress-bar"></div>
+                    </div>
+                    <button class="loading-cancel">Cancel</button>
                 </div>
             `;
 
             document.body.appendChild(loadingIndicator);
 
+            // Add animation after a small delay to trigger transitions
+            setTimeout(() => {
+                loadingIndicator.classList.add('visible');
+            }, 10);
+
             // Set up message rotation
             let messageIndex = 0;
             const messageElement = loadingIndicator.querySelector('#loading-message');
 
-            // Change message every 2 seconds
+            // Change message every 2.5 seconds
             const messageInterval = setInterval(() => {
                 messageIndex = (messageIndex + 1) % loadingMessages.length;
-                messageElement.textContent = loadingMessages[messageIndex];
-            }, 2000);
+                // Fade out
+                messageElement.style.opacity = 0;
+                setTimeout(() => {
+                    // Change text and fade in
+                    messageElement.textContent = loadingMessages[messageIndex];
+                    messageElement.style.opacity = 1;
+                }, 300);
+            }, 2500);
 
             // Store the interval ID on the loading indicator element so we can clear it later
             loadingIndicator.messageInterval = messageInterval;
+
+            // Add cancel functionality
+            const cancelButton = loadingIndicator.querySelector('.loading-cancel');
+            cancelButton.addEventListener('click', () => {
+                // Clear the message interval
+                clearInterval(loadingIndicator.messageInterval);
+
+                // Remove loading indicator with animation
+                loadingIndicator.classList.remove('visible');
+                setTimeout(() => {
+                    if (document.body.contains(loadingIndicator)) {
+                        document.body.removeChild(loadingIndicator);
+                    }
+                }, 300);
+
+                // Abort the fetch if possible
+                if (controller) {
+                    controller.abort();
+                }
+            });
+
+            // Create an AbortController to allow canceling the fetch
+            const controller = new AbortController();
+            const signal = controller.signal;
 
             // Call the Gemini API through our Flask backend
             // Use relative URL for compatibility with both local and Vercel deployment
@@ -331,14 +374,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     query: searchTerm,
                     method: 'Comprehensive' // Use a comprehensive analysis that combines all methods
                 }),
+                signal: signal
             })
             .then(response => response.json())
             .then(data => {
                 // Clear the message interval
                 clearInterval(loadingIndicator.messageInterval);
 
-                // Remove loading indicator
-                document.body.removeChild(loadingIndicator);
+                // Remove loading indicator with animation
+                loadingIndicator.classList.remove('visible');
+                setTimeout(() => {
+                    document.body.removeChild(loadingIndicator);
+                }, 300);
 
                 // Display the result
                 const resultModal = document.createElement('div');
@@ -365,38 +412,261 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Select a random quote
                 const randomQuote = athleticQuotes[Math.floor(Math.random() * athleticQuotes.length)];
 
+                // Format current date and time
+                const now = new Date();
+                const formattedDate = now.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                const formattedTime = now.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                // Create the modal content
                 resultModal.innerHTML = `
                     <div class="result-content ${mobileClass}">
                         <div class="result-header">
                             <h3>Analysis Results</h3>
-                            <button class="close-button" aria-label="Close">&times;</button>
+                            <button class="close-button" aria-label="Close"></button>
                         </div>
                         <div class="result-body">
                             <div class="markdown-content">${data.result.html || data.result.replace(/\n/g, '<br>')}</div>
                             <div class="athletic-quote">"${randomQuote}"</div>
                         </div>
+                        <div class="result-footer">
+                            <div class="result-timestamp">Generated on ${formattedDate} at ${formattedTime}</div>
+                            <div class="result-actions">
+                                <button class="action-button share-button">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8.59 13.51L15.42 17.49" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M15.41 6.51L8.59 10.49" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Share
+                                </button>
+                                <button class="action-button save-button">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16L21 8V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M17 21V13H7V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M7 3V8H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Save
+                                </button>
+                                <button class="action-button print-button">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6 9V2H18V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M6 18H4C3.46957 18 2.96086 17.7893 2.58579 17.4142C2.21071 17.0391 2 16.5304 2 16V11C2 10.4696 2.21071 9.96086 2.58579 9.58579C2.96086 9.21071 3.46957 9 4 9H20C20.5304 9 21.0391 9.21071 21.4142 9.58579C21.7893 9.96086 22 10.4696 22 11V16C22 16.5304 21.7893 17.0391 21.4142 17.4142C21.0391 17.7893 20.5304 18 20 18H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M18 14H6V22H18V14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Print
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 `;
+
                 document.body.appendChild(resultModal);
+
+                // Add animation after a small delay to trigger transitions
+                setTimeout(() => {
+                    resultModal.classList.add('visible');
+                }, 10);
 
                 // Add close functionality
                 resultModal.querySelector('.close-button').addEventListener('click', () => {
-                    document.body.removeChild(resultModal);
+                    // First remove the visible class to trigger the exit animation
+                    resultModal.classList.remove('visible');
+
+                    // Then remove the element after the animation completes
+                    setTimeout(() => {
+                        document.body.removeChild(resultModal);
+                    }, 300);
+                });
+
+                // Add action button functionality
+                resultModal.querySelector('.share-button').addEventListener('click', () => {
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Waste & Fraud Detection Analysis',
+                            text: `Analysis Results: ${searchTerm}\n\n${data.result.text.substring(0, 100)}...`,
+                            url: window.location.href
+                        }).catch(err => {
+                            console.log('Error sharing:', err);
+                        });
+                    } else {
+                        alert('Sharing is not supported in your browser. You can copy the URL manually.');
+                    }
+                });
+
+                resultModal.querySelector('.save-button').addEventListener('click', () => {
+                    const blob = new Blob([`# Analysis Results for "${searchTerm}"\n\n${data.result.text}\n\n${formattedDate} at ${formattedTime}`], {type: 'text/plain'});
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `analysis-${searchTerm.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.txt`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+
+                resultModal.querySelector('.print-button').addEventListener('click', () => {
+                    const printWindow = window.open('', '_blank');
+                    printWindow.document.write(`
+                        <html>
+                            <head>
+                                <title>Analysis Results for "${searchTerm}"</title>
+                                <style>
+                                    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+                                    h1 { border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+                                    .timestamp { color: #666; font-size: 0.9rem; margin-top: 30px; }
+                                    .quote { font-style: italic; margin: 30px 0; padding: 15px; border-left: 3px solid #ddd; }
+                                </style>
+                            </head>
+                            <body>
+                                <h1>Analysis Results for "${searchTerm}"</h1>
+                                <div>${data.result.html || data.result.text.replace(/\n/g, '<br>')}</div>
+                                <div class="quote">"${randomQuote}"</div>
+                                <div class="timestamp">Generated on ${formattedDate} at ${formattedTime}</div>
+                            </body>
+                        </html>
+                    `);
+                    printWindow.document.close();
+                    printWindow.focus();
+                    setTimeout(() => {
+                        printWindow.print();
+                    }, 250);
                 });
             })
             .catch(error => {
                 // Clear the message interval
                 clearInterval(loadingIndicator.messageInterval);
 
-                // Remove loading indicator
-                document.body.removeChild(loadingIndicator);
+                // Remove loading indicator with animation
+                loadingIndicator.classList.remove('visible');
+                setTimeout(() => {
+                    document.body.removeChild(loadingIndicator);
+                }, 300);
 
-                // Show error
-                alert(`Error: ${error.message}. Make sure the Flask server is running.`);
+                // Create an error modal instead of using alert
+                const errorModal = document.createElement('div');
+                errorModal.className = 'result-modal';
+
+                errorModal.innerHTML = `
+                    <div class="result-content ${isMobile ? 'mobile-result' : ''}">
+                        <div class="result-header">
+                            <h3>Error Occurred</h3>
+                            <button class="close-button" aria-label="Close"></button>
+                        </div>
+                        <div class="result-body">
+                            <div class="markdown-content">
+                                <h2>Unable to Process Request</h2>
+                                <p>We encountered an error while processing your search:</p>
+                                <pre>${error.message}</pre>
+                                <p>Please try again later or contact support if the issue persists.</p>
+                                <p>Make sure the server is running properly.</p>
+                            </div>
+                        </div>
+                        <div class="result-footer">
+                            <div class="result-timestamp">Error occurred at ${new Date().toLocaleTimeString()}</div>
+                            <div class="result-actions">
+                                <button class="action-button retry-button">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 4V10H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M23 20V14H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M20.49 9C19.9828 7.56678 19.1209 6.2854 17.9845 5.27542C16.8482 4.26543 15.4745 3.55976 13.9917 3.22426C12.5089 2.88875 10.9652 2.93434 9.50481 3.35677C8.04437 3.77921 6.71475 4.56471 5.64 5.64L1 10M23 14L18.36 18.36C17.2853 19.4353 15.9556 20.2208 14.4952 20.6432C13.0348 21.0657 11.4911 21.1112 10.0083 20.7757C8.52547 20.4402 7.1518 19.7346 6.01547 18.7246C4.87913 17.7146 4.01717 16.4332 3.51 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Retry
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.body.appendChild(errorModal);
+
+                // Add animation after a small delay to trigger transitions
+                setTimeout(() => {
+                    errorModal.classList.add('visible');
+                }, 10);
+
+                // Add close functionality
+                errorModal.querySelector('.close-button').addEventListener('click', () => {
+                    // First remove the visible class to trigger the exit animation
+                    errorModal.classList.remove('visible');
+
+                    // Then remove the element after the animation completes
+                    setTimeout(() => {
+                        document.body.removeChild(errorModal);
+                    }, 300);
+                });
+
+                // Add retry functionality
+                errorModal.querySelector('.retry-button').addEventListener('click', () => {
+                    errorModal.classList.remove('visible');
+                    setTimeout(() => {
+                        document.body.removeChild(errorModal);
+                        performSearch(method);
+                    }, 300);
+                });
+
+                // Log error to console
                 console.error('Error:', error);
             });
         } else {
-            alert(`Please enter a query to use ${method}`);
+            // Create an empty search modal instead of using alert
+            const emptySearchModal = document.createElement('div');
+            emptySearchModal.className = 'result-modal';
+
+            emptySearchModal.innerHTML = `
+                <div class="result-content ${isMobile ? 'mobile-result' : ''}">
+                    <div class="result-header">
+                        <h3>Empty Search</h3>
+                        <button class="close-button" aria-label="Close"></button>
+                    </div>
+                    <div class="result-body">
+                        <div class="markdown-content">
+                            <h2>Please Enter a Search Query</h2>
+                            <p>You need to enter a search term to use the ${method} function.</p>
+                            <p>Try searching for specific terms related to waste, fraud, or compliance issues.</p>
+                        </div>
+                    </div>
+                    <div class="result-footer">
+                        <div class="result-actions">
+                            <button class="action-button ok-button">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(emptySearchModal);
+
+            // Add animation after a small delay to trigger transitions
+            setTimeout(() => {
+                emptySearchModal.classList.add('visible');
+            }, 10);
+
+            // Add close functionality
+            const closeModal = () => {
+                emptySearchModal.classList.remove('visible');
+                setTimeout(() => {
+                    document.body.removeChild(emptySearchModal);
+                    // Focus on the search input
+                    searchInput.focus();
+                }, 300);
+            };
+
+            emptySearchModal.querySelector('.close-button').addEventListener('click', closeModal);
+            emptySearchModal.querySelector('.ok-button').addEventListener('click', closeModal);
         }
     }
 });
