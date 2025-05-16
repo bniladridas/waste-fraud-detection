@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#1A1A1A" opacity="0.1"/>
+  
+  <!-- Data visualization elements that will animate -->
+  <g id="data-elements">
+    <!-- Bar chart -->
+    <rect x="40" y="140" width="20" height="40" fill="#1A1A1A" opacity="0.7">
+      <animate attributeName="height" values="10;40;20;40" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="170;140;160;140" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="70" y="120" width="20" height="60" fill="#1A1A1A" opacity="0.8">
+      <animate attributeName="height" values="30;60;40;60" dur="1.7s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="150;120;140;120" dur="1.7s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="100" y="100" width="20" height="80" fill="#1A1A1A" opacity="0.9">
+      <animate attributeName="height" values="50;80;60;80" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="130;100;120;100" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="130" y="130" width="20" height="50" fill="#1A1A1A" opacity="0.8">
+      <animate attributeName="height" values="20;50;30;50" dur="1.8s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="160;130;150;130" dur="1.8s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Pie chart segments -->
+    <path d="M100 60 L100 20 A40 40 0 0 1 135.4 40 Z" fill="#1A1A1A" opacity="0.7">
+      <animateTransform attributeName="transform" type="rotate" from="0 100 60" to="360 100 60" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M100 60 L135.4 40 A40 40 0 0 1 135.4 80 Z" fill="#1A1A1A" opacity="0.8">
+      <animateTransform attributeName="transform" type="rotate" from="0 100 60" to="360 100 60" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M100 60 L135.4 80 A40 40 0 0 1 100 100 Z" fill="#1A1A1A" opacity="0.9">
+      <animateTransform attributeName="transform" type="rotate" from="0 100 60" to="360 100 60" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M100 60 L100 100 A40 40 0 0 1 64.6 80 Z" fill="#1A1A1A" opacity="0.7">
+      <animateTransform attributeName="transform" type="rotate" from="0 100 60" to="360 100 60" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M100 60 L64.6 80 A40 40 0 0 1 64.6 40 Z" fill="#1A1A1A" opacity="0.8">
+      <animateTransform attributeName="transform" type="rotate" from="0 100 60" to="360 100 60" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M100 60 L64.6 40 A40 40 0 0 1 100 20 Z" fill="#1A1A1A" opacity="0.9">
+      <animateTransform attributeName="transform" type="rotate" from="0 100 60" to="360 100 60" dur="3s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Scanning line -->
+    <line x1="30" y1="100" x2="170" y2="100" stroke="#1A1A1A" stroke-width="2" stroke-dasharray="5,3">
+      <animate attributeName="y1" values="40;160;40" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="y2" values="40;160;40" dur="3s" repeatCount="indefinite"/>
+    </line>
+    
+    <!-- Pulse circles -->
+    <circle cx="100" cy="100" r="5" fill="#1A1A1A" opacity="0.9">
+      <animate attributeName="r" values="5;20;5" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.9;0.1;0.9" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Data points -->
+    <circle cx="50" cy="70" r="3" fill="#1A1A1A">
+      <animate attributeName="cy" values="70;65;75;70" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="80" cy="50" r="3" fill="#1A1A1A">
+      <animate attributeName="cy" values="50;45;55;50" dur="1.7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="110" cy="80" r="3" fill="#1A1A1A">
+      <animate attributeName="cy" values="80;75;85;80" dur="1.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="140" cy="60" r="3" fill="#1A1A1A">
+      <animate attributeName="cy" values="60;55;65;60" dur="1.9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

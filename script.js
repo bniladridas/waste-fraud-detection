@@ -27,6 +27,86 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Handle floating terms and copyright
+    const floatingTerms = document.getElementById('floating-terms');
+    const minimizeTermsBtn = document.getElementById('minimize-terms');
+    const closeTermsBtn = document.getElementById('close-terms');
+    const viewTermsBtn = document.getElementById('view-terms-btn');
+    const viewPrivacyBtn = document.getElementById('view-privacy-btn');
+
+    // Show floating terms after a delay if not already hidden
+    if (!sessionStorage.getItem('termsHidden')) {
+        setTimeout(() => {
+            floatingTerms.classList.add('show');
+        }, 5000); // Show after 5 seconds
+    }
+
+    // Handle minimize button click
+    if (minimizeTermsBtn) {
+        minimizeTermsBtn.addEventListener('click', () => {
+            floatingTerms.classList.toggle('minimized');
+            minimizeTermsBtn.textContent = floatingTerms.classList.contains('minimized') ? '+' : '−';
+        });
+    }
+
+    // Handle close button click
+    if (closeTermsBtn) {
+        closeTermsBtn.addEventListener('click', () => {
+            floatingTerms.classList.remove('show');
+            // Store in session storage so it doesn't show again during this session
+            sessionStorage.setItem('termsHidden', 'true');
+        });
+    }
+
+    // Handle Terms of Service button click
+    if (viewTermsBtn) {
+        viewTermsBtn.addEventListener('click', () => {
+            alert('Terms of Service: This system is provided for authorized use only. All activities are logged and monitored. Unauthorized access is prohibited and may result in legal action. By using this system, you agree to comply with all applicable laws and regulations.');
+        });
+    }
+
+    // Handle Privacy Policy button click
+    if (viewPrivacyBtn) {
+        viewPrivacyBtn.addEventListener('click', () => {
+            alert('Privacy Policy: We collect and process data necessary for fraud detection purposes. Your data is handled securely and in compliance with applicable privacy laws. We do not share your personal information with third parties except as required by law or with your explicit consent.');
+        });
+    }
+
+    // Make the floating terms draggable
+    if (floatingTerms) {
+        const termsHeader = floatingTerms.querySelector('.terms-header');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        termsHeader.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - floatingTerms.getBoundingClientRect().left;
+            offsetY = e.clientY - floatingTerms.getBoundingClientRect().top;
+            floatingTerms.style.transition = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+
+                // Keep within window bounds
+                const maxX = window.innerWidth - floatingTerms.offsetWidth;
+                const maxY = window.innerHeight - floatingTerms.offsetHeight;
+
+                floatingTerms.style.right = 'auto';
+                floatingTerms.style.bottom = 'auto';
+                floatingTerms.style.left = `${Math.max(0, Math.min(maxX, x))}px`;
+                floatingTerms.style.top = `${Math.max(0, Math.min(maxY, y))}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            floatingTerms.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+    }
+
     // Fade in the quote
     const quote = document.querySelector('.quote');
 
@@ -201,11 +281,44 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create a loading indicator
             const loadingIndicator = document.createElement('div');
             loadingIndicator.className = 'loading-indicator';
+
+            // Array of loading messages
+            const loadingMessages = [
+                "Analyzing data patterns...",
+                "Detecting anomalies...",
+                "Applying fraud detection algorithms...",
+                "Scanning for compliance issues...",
+                "Identifying potential waste...",
+                "Cross-referencing with known patterns...",
+                "Evaluating risk factors...",
+                "Generating insights...",
+                "Preparing comprehensive analysis..."
+            ];
+
+            // Create the loading content
             loadingIndicator.innerHTML = `
-                <div class="loading-spinner"></div>
-                <p>Processing your search request...</p>
+                <div class="loading-animation">
+                    <img src="data-analysis-loader.svg" alt="Loading" width="200" height="200">
+                </div>
+                <div class="loading-message-container">
+                    <p id="loading-message">Initializing analysis...</p>
+                </div>
             `;
+
             document.body.appendChild(loadingIndicator);
+
+            // Set up message rotation
+            let messageIndex = 0;
+            const messageElement = loadingIndicator.querySelector('#loading-message');
+
+            // Change message every 2 seconds
+            const messageInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % loadingMessages.length;
+                messageElement.textContent = loadingMessages[messageIndex];
+            }, 2000);
+
+            // Store the interval ID on the loading indicator element so we can clear it later
+            loadingIndicator.messageInterval = messageInterval;
 
             // Call the Gemini API through our Flask backend
             // Use relative URL for compatibility with both local and Vercel deployment
@@ -221,6 +334,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => response.json())
             .then(data => {
+                // Clear the message interval
+                clearInterval(loadingIndicator.messageInterval);
+
                 // Remove loading indicator
                 document.body.removeChild(loadingIndicator);
 
@@ -269,6 +385,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             })
             .catch(error => {
+                // Clear the message interval
+                clearInterval(loadingIndicator.messageInterval);
+
                 // Remove loading indicator
                 document.body.removeChild(loadingIndicator);
 
