@@ -7,6 +7,26 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('mobile-device');
     }
 
+    // Handle cookie notice
+    const cookieNotice = document.getElementById('cookie-notice');
+    const acceptCookiesBtn = document.getElementById('accept-cookies');
+
+    // Check if user has already accepted cookies
+    if (!localStorage.getItem('cookiesAccepted')) {
+        // Show the cookie notice after a short delay
+        setTimeout(() => {
+            cookieNotice.classList.add('show');
+        }, 1000);
+    }
+
+    // Handle accept button click
+    if (acceptCookiesBtn) {
+        acceptCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookiesAccepted', 'true');
+            cookieNotice.classList.remove('show');
+        });
+    }
+
     // Fade in the quote
     const quote = document.querySelector('.quote');
 
@@ -212,6 +232,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                 const mobileClass = isMobile ? 'mobile-result' : '';
 
+                // Athletic motivational quotes
+                const athleticQuotes = [
+                    "Champions keep playing until they get it right. — Billie Jean King",
+                    "It's not whether you get knocked down; it's whether you get up. — Vince Lombardi",
+                    "The harder you work, the harder it is to surrender. — Vince Lombardi",
+                    "The only way to prove you're a good sport is to lose. — Ernie Banks",
+                    "It's not the will to win that matters—everyone has that. It's the will to prepare to win that matters. — Paul Bryant",
+                    "The difference between the impossible and the possible lies in a person's determination. — Tommy Lasorda",
+                    "Never give up, never give in, and when the upper hand is ours, may we have the ability to handle the win with the dignity that we absorbed the loss. — Doug Williams",
+                    "You miss 100% of the shots you don't take. — Wayne Gretzky",
+                    "Hard work beats talent when talent doesn't work hard. — Tim Notke",
+                    "The more difficult the victory, the greater the happiness in winning. — Pelé"
+                ];
+
+                // Select a random quote
+                const randomQuote = athleticQuotes[Math.floor(Math.random() * athleticQuotes.length)];
+
                 resultModal.innerHTML = `
                     <div class="result-content ${mobileClass}">
                         <div class="result-header">
@@ -220,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="result-body">
                             <div class="markdown-content">${data.result.html || data.result.replace(/\n/g, '<br>')}</div>
+                            <div class="athletic-quote">"${randomQuote}"</div>
                         </div>
                     </div>
                 `;

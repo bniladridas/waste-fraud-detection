@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="white"/>
+  
+  <!-- Weightlifter silhouette -->
+  <circle cx="100" cy="60" r="15" fill="#1A1A1A"/>
+  <path d="M100 75V110" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100 85L70 85" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100 85L130 85" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M70 85L70 95" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M130 85L130 95" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100 110L80 140" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100 110L120 140" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Barbell weights -->
+  <rect x="50" y="80" width="10" height="20" rx="2" fill="#1A1A1A"/>
+  <rect x="140" y="80" width="10" height="20" rx="2" fill="#1A1A1A"/>
+  <rect x="35" y="75" width="15" height="30" rx="2" fill="#1A1A1A"/>
+  <rect x="150" y="75" width="15" height="30" rx="2" fill="#1A1A1A"/>
+  
+  <!-- Effort symbols -->
+  <path d="M75 50C75 50 80 45 85 50C90 55 95 50 95 50" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M105 50C105 50 110 45 115 50C120 55 125 50 125 50" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Platform -->
+  <rect x="30" y="140" width="140" height="10" rx="2" fill="#1A1A1A" opacity="0.2"/>
+  
+  <!-- Motivational elements -->
+  <circle cx="40" cy="40" r="10" fill="#1A1A1A" opacity="0.1"/>
+  <circle cx="160" cy="40" r="10" fill="#1A1A1A" opacity="0.1"/>
+  <path d="M40 35V45M35 40H45" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M160 35V45M155 40H165" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+</svg>

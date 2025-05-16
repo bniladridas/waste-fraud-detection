@@ -581,6 +581,23 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.result-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    background-image: url('athlete-determination.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top right;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .result-header {
@@ -611,6 +628,30 @@ body {
     overflow-y: auto;
     max-height: calc(80vh - 60px);
     line-height: 1.6;
+    position: relative;
+    background-image:
+        url('athlete-perseverance.svg'),
+        url('athlete-strength.svg');
+    background-position:
+        bottom left,
+        bottom right;
+    background-size:
+        100px 100px,
+        100px 100px;
+    background-repeat: no-repeat;
+    background-attachment: local;
+}
+
+.result-body::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* Markdown content styling */
@@ -729,6 +770,41 @@ body {
     margin: 24px 0;
     background-color: #e1e4e8;
     border: 0;
+}
+
+/* Athletic quote styling */
+.athletic-quote {
+    margin-top: 30px;
+    padding: 15px 20px;
+    font-style: italic;
+    color: #333;
+    border-left: 4px solid #1a1a1a;
+    background-color: rgba(245, 245, 220, 0.3);
+    border-radius: 0 5px 5px 0;
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 500;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.athletic-quote::before {
+    content: """;
+    font-size: 4rem;
+    position: absolute;
+    left: 10px;
+    top: -20px;
+    color: rgba(26, 26, 26, 0.1);
+    font-family: Georgia, serif;
+}
+
+@media (max-width: 768px) {
+    .athletic-quote {
+        font-size: 0.95rem;
+        padding: 12px 15px;
+        margin-top: 20px;
+    }
 }
 
 
@@ -918,4 +994,58 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Custom Cookie Notice */
+.cookie-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1a1a1a;
+    color: #f5f5dc;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.cookie-notice.show {
+    transform: translateY(0);
+}
+
+.cookie-notice p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.cookie-notice button {
+    background-color: #f5f5dc;
+    color: #1a1a1a;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cookie-notice button:hover {
+    background-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .cookie-notice {
+        flex-direction: column;
+        padding: 12px;
+    }
+
+    .cookie-notice p {
+        margin-bottom: 10px;
+        text-align: center;
+    }
 }

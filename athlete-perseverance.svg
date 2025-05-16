@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="white"/>
+  
+  <!-- Mountain -->
+  <path d="M0 150L40 80L80 120L120 60L160 100L200 40V200H0V150Z" fill="#1A1A1A" opacity="0.1"/>
+  
+  <!-- Climber -->
+  <circle cx="90" cy="100" r="8" fill="#1A1A1A"/>
+  <path d="M90 108V130" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 115L75 125" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 115L105 125" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 130L75 150" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 130L105 150" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Climbing rope -->
+  <path d="M90 92V40" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 2"/>
+  
+  <!-- Summit flag -->
+  <path d="M160 40V60" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M160 40L145 45L160 50" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1"/>
+  
+  <!-- Determination symbols -->
+  <path d="M70 80L75 75M80 70L85 65" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M110 80L105 75M100 70L95 65" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Sweat droplet -->
+  <path d="M85 100C85 100 80 95 80 90C80 87.2386 82.2386 85 85 85C87.7614 85 90 87.2386 90 90C90 95 85 100 85 100Z" fill="#1A1A1A" opacity="0.5"/>
+</svg>

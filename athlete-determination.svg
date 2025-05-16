@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#1A1A1A" opacity="0.1"/>
+  
+  <!-- Runner silhouette -->
+  <path d="M130 70C135.523 70 140 65.5228 140 60C140 54.4772 135.523 50 130 50C124.477 50 120 54.4772 120 60C120 65.5228 124.477 70 130 70Z" fill="#1A1A1A"/>
+  <path d="M155 105L140 85L130 95L135 110L120 125L105 110L95 120L75 100L65 110L55 100L45 110L35 100" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M140 85L125 75L115 85L105 75L90 85" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M120 125L115 145L125 160" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M105 110L95 145L85 160" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Sweat droplets -->
+  <circle cx="145" cy="75" r="2" fill="#1A1A1A"/>
+  <circle cx="150" cy="80" r="2" fill="#1A1A1A"/>
+  <circle cx="155" cy="85" r="2" fill="#1A1A1A"/>
+  
+  <!-- Motion lines -->
+  <path d="M160 100L170 100" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M165 90L175 90" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M165 110L175 110" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Finish line -->
+  <path d="M180 60V160" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 5"/>
+</svg>
